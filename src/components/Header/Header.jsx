@@ -11,7 +11,9 @@ export default function Header() {
             <img src={logo} alt="logo" width="124" height="26" />
           </Logo>
           <BtnWrap>
-            <Button>Users</Button>
+            <a href="#users">
+              <Button>Users</Button>
+            </a>
             <Button>Sign up</Button>
           </BtnWrap>
         </AppBar>
