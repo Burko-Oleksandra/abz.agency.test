@@ -5,6 +5,7 @@ import { fetchContacts } from 'redux/thunks/index';
 import Header from './Header/Header';
 import Hero from './Hero/Hero';
 import UsersList from './Users/UsersList';
+import Register from './Form/Register';
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts.contacts);
@@ -19,6 +20,7 @@ export const App = () => {
       <Header />
       <Hero />
       <UsersList contacts={contacts} />
+      <Register />
     </>
   );
 };
