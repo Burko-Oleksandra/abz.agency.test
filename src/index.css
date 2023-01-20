@@ -73,3 +73,42 @@ button {
 .no-scroll {
   overflow: hidden;
 }
+
+.dataInput:focus + .dataLabel,
+.dataInput:not(:placeholder-shown) + .dataLabel {
+  text-align: center;
+  width: 60px;
+  background-color: #f8f8f8;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.2;
+
+  color: #7e7e7e;
+  transform: translateY(-35px);
+  outline: none;
+}
+
+.datainput:invalid:not(:placeholder-shown) {
+  border: 2px solid #cb3d40;
+}
+
+.datainput:invalid:not(:placeholder-shown) + .dataLabel {
+  color: #cb3d40;
+}
+
+input[type='file' i] {
+  color: red;
+}
+
+.real-radio:checked + .custom-radio::before {
+  display: block;
+}
+
+.real-radio:checked + .custom-radio {
+  border: 1px solid #00bdd3;
+}
+
+.disabled-button:disabled {
+  background: #b4b4b4;
+  color: rgba(255, 255, 255, 0.87);
+}

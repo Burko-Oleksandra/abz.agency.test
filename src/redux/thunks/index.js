@@ -1,19 +1,16 @@
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
-  async function (_, { rejectWithValue }) {
-    try {
-      const response = await fetch(
-        'https://63c83c875c0760f69ac83edb.mockapi.io/contacts/abzagency?page=1&limit=6'
-      );
+axios.defaults.baseURL = 'https://63c83c875c0760f69ac83edb.mockapi.io';
 
-      if (!response.ok) {
-        throw new Error('Server Error!');
-      }
-      const data = await response.json();
-      console.log(data);
-      return data;
+export const fetchContacts = createAsyncThunk(
+  'contacts',
+  async (page = 1, { rejectWithValue }) => {
+    console.log('qweqwe');
+    try {
+      const response = await axios.get(`/abzagency?page=${page}&limit=6`);
+
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

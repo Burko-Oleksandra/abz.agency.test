@@ -8,18 +8,11 @@ import UsersList from './Users/UsersList';
 import Register from './Form/Register';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
     <>
       <Header />
       <Hero />
-      <UsersList contacts={contacts} />
+      <UsersList />
       <Register />
     </>
   );

@@ -19,8 +19,4 @@ export const Btn = styled.button`
   &:focus {
     background-color: #ffe302;
   }
-
-  &:disabled {
-    background-color: #b4b4b4;
-  }
 `;

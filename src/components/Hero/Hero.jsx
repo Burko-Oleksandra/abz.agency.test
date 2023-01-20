@@ -38,7 +38,9 @@ export default function Hero() {
         mind. They should also be excited to learn, as the world of Front-End
         Development keeps evolving.
       </Description>
-      <Button>Sign up</Button>
+      <a href="#signUp">
+        <Button>Sign up</Button>
+      </a>
     </Container>
   );
 }

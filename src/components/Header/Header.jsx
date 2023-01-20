@@ -14,7 +14,9 @@ export default function Header() {
             <a href="#users">
               <Button>Users</Button>
             </a>
-            <Button>Sign up</Button>
+            <a href="#signUp">
+              <Button>Sign up</Button>
+            </a>
           </BtnWrap>
         </AppBar>
       </Container>

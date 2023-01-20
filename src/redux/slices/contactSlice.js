@@ -13,15 +13,24 @@ const setPending = state => {
 
 const setfulfilled = (state, { payload }) => {
   state.status = 'resolved';
+  console.log(state.contacts, payload);
   state.contacts = payload;
 };
 
-const contactsSlice = createSlice({
+export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     contacts: [],
     status: null,
     error: null,
+  },
+  reducers: {
+    setContacts: (state, { payload }) => {
+      console.log(state.contacts);
+      // state.contacts = [...state.contacts, ...payload];
+      state.contacts.concat(payload);
+      console.log(state.contacts);
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchContacts.pending, setPending);
