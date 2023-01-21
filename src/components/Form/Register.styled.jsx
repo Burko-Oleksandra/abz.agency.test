@@ -149,30 +149,6 @@ export const FakeRadio = styled.span`
   }
 `;
 
-export const PhotoLabel = styled.label`
-  background-color: indigo;
-  color: white;
-  padding: 0.5rem;
-  font-family: sans-serif;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  margin-top: 1rem;
-`;
-
-export const PhotoFake = styled.span`
-  margin-left: 0.3rem;
-  font-family: sans-serif;
-`;
-
-export const PhotoInput = styled.input`
-  position: absolute;
-
-  width: 0;
-  height: 0;
-
-  opacity: 0;
-`;
-
 export const Button = styled.button`
   display: block;
   align-items: center;

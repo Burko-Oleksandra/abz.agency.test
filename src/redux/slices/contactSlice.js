@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addNewContact } from '../thunks';
+import {
+  fetchFirstVisibleContacts,
+  fetchContacts,
+  addNewContact,
+} from '../thunks';
 
 const setError = (state, { payload }) => {
   state.status = 'rejected';
@@ -11,38 +15,39 @@ const setPending = state => {
   state.error = null;
 };
 
-const setfulfilled = (state, { payload }) => {
+const setFirstVisibleContacts = (state, { payload }) => {
   state.status = 'resolved';
-  console.log(state.contacts, payload);
   state.contacts = payload;
 };
 
-export const contactsSlice = createSlice({
+const setContacts = (state, { payload }) => {
+  state.contacts = [...state.contacts, ...payload];
+};
+
+const addContact = (state, { payload }) => {
+  state.status = 'resolved';
+  state.contacts.unshift(payload);
+};
+
+const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     contacts: [],
     status: null,
     error: null,
   },
-  reducers: {
-    setContacts: (state, { payload }) => {
-      console.log(state.contacts);
-      // state.contacts = [...state.contacts, ...payload];
-      state.contacts.concat(payload);
-      console.log(state.contacts);
-    },
-  },
   extraReducers: builder => {
+    builder.addCase(fetchFirstVisibleContacts.pending, setPending);
+    builder.addCase(fetchFirstVisibleContacts.rejected, setError);
+    builder.addCase(fetchFirstVisibleContacts.fulfilled, setFirstVisibleContacts);
+
     builder.addCase(fetchContacts.pending, setPending);
-    builder.addCase(fetchContacts.fulfilled, setfulfilled);
     builder.addCase(fetchContacts.rejected, setError);
+    builder.addCase(fetchContacts.fulfilled, setContacts);
 
     builder.addCase(addNewContact.pending, setPending);
-    builder.addCase(addNewContact.fulfilled, (state, { payload }) => {
-      state.status = 'resolved';
-      state.contacts.unshift(payload);
-    });
     builder.addCase(addNewContact.rejected, setError);
+    builder.addCase(addNewContact.fulfilled, addContact);
   },
 });
 

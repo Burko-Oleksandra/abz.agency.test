@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchContacts } from 'redux/thunks';
-import { contactsSlice } from 'redux/slices/contactSlice';
+import { fetchFirstVisibleContacts, fetchContacts } from 'redux/thunks';
 
 import {
   UserWrap,
@@ -15,22 +14,18 @@ import {
 } from './UsersList.styled';
 
 export default function UsersList() {
-  const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
+  const [page, setPage] = useState(2);
   const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchFirstVisibleContacts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
-
     dispatch(fetchContacts(page));
-    //   .then(response => {
-    //   console.log(response);
-    //   dispatch(contactsSlice.actions.setContacts(response.payload));
-    // });
   };
 
   return (
@@ -47,6 +42,7 @@ export default function UsersList() {
           </Item>
         ))}
       </List>
+
       <BtnShowMore onClick={loadMore}>Show more</BtnShowMore>
     </UserWrap>
   );

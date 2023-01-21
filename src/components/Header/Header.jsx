@@ -10,6 +10,7 @@ export default function Header() {
           <Logo href="/">
             <img src={logo} alt="logo" width="124" height="26" />
           </Logo>
+
           <BtnWrap>
             <a href="#users">
               <Button>Users</Button>

@@ -1,3 +1,6 @@
+import FileUploader from 'components/FileUploader/FileUploader';
+
+import { UPLOADER_FILE_TYPES } from '../../constants/index';
 import {
   SubTitle,
   FormWrap,
@@ -10,9 +13,6 @@ import {
   RadioLabel,
   RadioInput,
   FakeRadio,
-  PhotoLabel,
-  PhotoInput,
-  PhotoFake,
   Button,
 } from './Register.styled';
 
@@ -103,10 +103,9 @@ export default function Register() {
             QA
           </RadioLabel>
         </RadioWrap>
-        <PhotoInput type="file" id="actual-btn" name="photo" required />
-        <PhotoLabel htmlFor="actual-btn">Choose File</PhotoLabel>
-        <PhotoFake id="file-chosen">No file chosen</PhotoFake>
+        <FileUploader UPLOADER_FILE_TYPES={UPLOADER_FILE_TYPES} />
       </DataForm>
+
       <Button type="submit" disabled="disabled" className="disabled-button">
         Sign up
       </Button>

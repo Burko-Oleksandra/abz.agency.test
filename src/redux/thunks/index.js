@@ -1,14 +1,28 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://63c83c875c0760f69ac83edb.mockapi.io';
+import { API_URL, USERS_LIMIT } from 'constants';
+
+axios.defaults.baseURL = API_URL;
+
+export const fetchFirstVisibleContacts = createAsyncThunk(
+  'contacts/',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`abzagency?page=1&limit=${USERS_LIMIT}`);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const fetchContacts = createAsyncThunk(
   'contacts',
   async (page = 1, { rejectWithValue }) => {
-    console.log('qweqwe');
     try {
-      const response = await axios.get(`/abzagency?page=${page}&limit=6`);
+      const response = await axios.get(`/abzagency?page=${page}&limit=${USERS_LIMIT}`);
 
       return response.data;
     } catch (error) {
