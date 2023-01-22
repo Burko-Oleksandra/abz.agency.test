@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,6 +23,18 @@ export default function UsersList() {
     dispatch(fetchFirstVisibleContacts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   const totalHits = async () => {
+  //     await axios
+  //       .get('https://63c83c875c0760f69ac83edb.mockapi.io/contacts/abzagency')
+  //       .then(res => {
+  //         console.log(res.data);
+  //         console.log(res.headers['x-total-count']);
+  //       });
+  //   };
+  //   totalHits();
+  // }, []);
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);

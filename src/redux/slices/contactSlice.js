@@ -39,7 +39,10 @@ const contactsSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchFirstVisibleContacts.pending, setPending);
     builder.addCase(fetchFirstVisibleContacts.rejected, setError);
-    builder.addCase(fetchFirstVisibleContacts.fulfilled, setFirstVisibleContacts);
+    builder.addCase(
+      fetchFirstVisibleContacts.fulfilled,
+      setFirstVisibleContacts
+    );
 
     builder.addCase(fetchContacts.pending, setPending);
     builder.addCase(fetchContacts.rejected, setError);

@@ -7,6 +7,8 @@ import {
   RealInput,
 } from './FileUploader.styled';
 
+import { UPLOADER_FILE_TYPES } from '../../constants';
+
 export const checkUploadFileFormatIsValid = (file, acceptedFileFormats) =>
   acceptedFileFormats.some(
     fileType => file?.type.includes(fileType) || file?.name.includes(fileType)
@@ -14,7 +16,7 @@ export const checkUploadFileFormatIsValid = (file, acceptedFileFormats) =>
 
 const DEFAULT_UPLOAD_MAX_SIZE = 10; // MB
 
-const FileUploader = ({ UPLOADER_FILE_TYPES }) => {
+const FileUploader = ({ setAvatar }) => {
   const maxFileSizeInBytes = DEFAULT_UPLOAD_MAX_SIZE * 1024 * 1024;
 
   const dropAreaRef = useRef(null);
