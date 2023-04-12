@@ -6,15 +6,11 @@ import { API_URL, USERS_LIMIT } from 'constants';
 axios.defaults.baseURL = API_URL;
 
 export const fetchFirstVisibleContacts = createAsyncThunk(
-  'contacts/fetchFirstVisibleContacts',
+  '/users/fetchFirstVisibleContacts',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `/abzagency?page=1&limit=${USERS_LIMIT}`
-      );
-
-      console.log(response);
-      return response.data;
+      const response = await axios.get(`/users?page=1&count=${USERS_LIMIT}`);
+      return response.data.users;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -22,14 +18,14 @@ export const fetchFirstVisibleContacts = createAsyncThunk(
 );
 
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
+  '/users/fetchContacts',
   async (page = 1, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `/abzagency?page=${page}&limit=${USERS_LIMIT}`
+        `/users?page=${page}&count=${USERS_LIMIT}`
       );
 
-      return response.data;
+      return response.data.users;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -37,12 +33,25 @@ export const fetchContacts = createAsyncThunk(
 );
 
 export const addNewContact = createAsyncThunk(
-  'contacts/addNewContact',
+  '/users/addNewContact',
   async (newContact, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/abzagency', newContact);
+      const { data } = await axios.post('/users', newContact);
 
       return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchPositions = createAsyncThunk(
+  '/positions/fetchPositions',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/positions`);
+
+      return data.positions;
     } catch (error) {
       return rejectWithValue(error.message);
     }

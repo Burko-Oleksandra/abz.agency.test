@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,18 +23,6 @@ export default function UsersList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   const totalHits = async () => {
-  //     await axios
-  //       .get('https://63c83c875c0760f69ac83edb.mockapi.io/contacts/abzagency')
-  //       .then(res => {
-  //         console.log(res.data);
-  //         console.log(res.headers['x-total-count']);
-  //       });
-  //   };
-  //   totalHits();
-  // }, []);
-
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
     dispatch(fetchContacts(page));
@@ -45,9 +32,9 @@ export default function UsersList() {
     <UserWrap id="users">
       <SubTitle>Users</SubTitle>
       <List>
-        {contacts.map(({ name, avatar, email, phone, position, id }) => (
-          <Item key={id}>
-            <Avatar src={avatar} alt={name} width="70" height="70" />
+        {contacts.map(({ name, photo, email, phone, position }) => (
+          <Item key={email}>
+            <Avatar src={photo} alt={name} width="70" height="70" />
             <Description>{name}</Description>
             <p>{position}</p>
             <p>{email}</p>

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import shortid from 'shortid';
 
 import FileUploader from 'components/FileUploader/FileUploader';
 import Button from 'components/Button/Button';
 
-import { addNewContact } from 'redux/thunks';
+import { addNewContact, fetchPositions } from 'redux/thunks';
 import {
   SubTitle,
   FormWrap,
@@ -24,38 +24,16 @@ import {
 export default function RegisterForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [position, setPosition] = useState('');
+  const [positionId, setPositionId] = useState('');
   const [email, setEmail] = useState('');
-  // const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState('');
   const contacts = useSelector(state => state.contacts.contacts);
+  const positions = useSelector(state => state.positions.positions);
   const dispatch = useDispatch();
 
   const nameInputId = shortid.generate();
   const phoneInputId = shortid.generate();
-  const frontendId = shortid.generate();
-  const backendId = shortid.generate();
-  const designerId = shortid.generate();
-  const qaId = shortid.generate();
   const emailInputId = shortid.generate();
-
-  const positionList = [
-    {
-      id: frontendId,
-      radioInputValue: 'Frontend Developer',
-    },
-    {
-      id: backendId,
-      radioInputValue: 'Backend Developer',
-    },
-    {
-      id: designerId,
-      radioInputValue: 'Designer',
-    },
-    {
-      id: qaId,
-      radioInputValue: 'QA',
-    },
-  ];
 
   const handleInputChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -68,16 +46,16 @@ export default function RegisterForm() {
         break;
 
       case 'position':
-        setPosition(value);
+        setPositionId(value);
         break;
 
       case 'email':
         setEmail(value);
         break;
 
-      // case 'avatar':
-      //   setAvatar(value);
-      //   break;
+      case 'avatar':
+        setAvatar(value);
+        break;
 
       default:
         throw new Error('Error');
@@ -88,19 +66,19 @@ export default function RegisterForm() {
     setName('');
     setPhone('');
     setEmail('');
-    setPosition('');
-    // setAvatar('');
+    setPositionId('');
+    setAvatar('');
   };
 
   const handleSubmitForm = event => {
     event.preventDefault();
     const newContact = {
-      id: shortid.generate(),
+      token,
       name,
       email,
       phone,
-      position,
-      // avatar,
+      position_id: positionId,
+      avatar,
     };
     if (
       contacts.find(
@@ -113,6 +91,11 @@ export default function RegisterForm() {
     dispatch(addNewContact(newContact));
     resetForm();
   };
+
+  useEffect(() => {
+    dispatch(fetchPositions());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <FormWrap id="signUp">
@@ -169,7 +152,7 @@ export default function RegisterForm() {
         <Disription>Select your position</Disription>
         {
           <RadioWrap>
-            {positionList.map(positionListItem => (
+            {positions.map(positionListItem => (
               <RadioLabel
                 htmlFor={positionListItem.id}
                 key={positionListItem.id}
@@ -178,27 +161,26 @@ export default function RegisterForm() {
                   type="radio"
                   name="position"
                   id={positionListItem.id}
-                  value={positionListItem.radioInputValue}
+                  value={positionListItem.name}
                   onChange={handleInputChange}
                   className="real-radio"
                 />
                 <FakeRadio className="custom-radio"></FakeRadio>
-                {positionListItem.radioInputValue}
+                {positionListItem.name}
               </RadioLabel>
             ))}
           </RadioWrap>
         }
+        <FileUploader />
         <button
           type="submit"
           className={`button ${
-            !name || !email || !phone || !position ? 'disabledClass' : ''
+            !name || !email || !phone || !positionId ? 'disabledClass' : ''
           }`}
         >
           Sign up
         </button>
       </DataForm>
-
-      <FileUploader />
     </FormWrap>
   );
 }
