@@ -1,4 +1,4 @@
-import Button from 'components/Button/Button';
+import CustomBtn from 'components/Button/Button';
 import logo from '../../images/logo.png';
 import { Container, AppBar, Logo, BtnWrap } from './Header.styled';
 
@@ -13,10 +13,10 @@ export default function Header() {
 
           <BtnWrap>
             <a href="#users">
-              <Button>Users</Button>
+              <CustomBtn>Users</CustomBtn>
             </a>
             <a href="#signUp">
-              <Button>Sign up</Button>
+              <CustomBtn>Sign up</CustomBtn>
             </a>
           </BtnWrap>
         </AppBar>

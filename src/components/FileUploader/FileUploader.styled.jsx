@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+export const UploadContainer = styled.div`
+  margin-bottom: 50px;
+`;
+
 export const UploadWrap = styled.div`
   display: flex;
 `;

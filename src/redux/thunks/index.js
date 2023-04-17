@@ -36,9 +36,19 @@ export const addNewContact = createAsyncThunk(
   '/users/addNewContact',
   async (newContact, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/users', newContact);
-
-      return data;
+      const res = await axios.get(`/token`);
+      const getToken = res.data.token;
+      const response = await axios.post(`/users`, newContact, {
+        headers: { 'content-type': 'multipart/form-data', token: getToken },
+      });
+      const newData = {
+        name: newContact.name,
+        email: newContact.email,
+        phone: newContact.phone,
+        photo: newContact.photo.name,
+        id: response.data.user_id,
+      };
+      return newData;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -50,8 +60,19 @@ export const fetchPositions = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/positions`);
-
       return data.positions;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getToken = createAsyncThunk(
+  '/token/getToken',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/token`);
+      return data.token;
     } catch (error) {
       return rejectWithValue(error.message);
     }

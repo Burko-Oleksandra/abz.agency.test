@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Btn = styled.button`
+export const CustomBtn = styled.button`
   display: block;
   align-items: center;
   justify-content: center;

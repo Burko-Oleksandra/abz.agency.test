@@ -21,7 +21,7 @@ export default function UsersList() {
   useEffect(() => {
     dispatch(fetchFirstVisibleContacts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [contacts.length]);
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
@@ -32,15 +32,17 @@ export default function UsersList() {
     <UserWrap id="users">
       <SubTitle>Users</SubTitle>
       <List>
-        {contacts.map(({ name, photo, email, phone, position }) => (
-          <Item key={email}>
-            <Avatar src={photo} alt={name} width="70" height="70" />
-            <Description>{name}</Description>
-            <p>{position}</p>
-            <p>{email}</p>
-            <p>{phone}</p>
-          </Item>
-        ))}
+        {contacts
+          .slice(0, 6)
+          .map(({ name, photo, email, phone, position, id }) => (
+            <Item key={id}>
+              <Avatar src={photo} alt={name} width="70" height="70" />
+              <Description>{name}</Description>
+              <p>{position}</p>
+              <p>{email}</p>
+              <p>{phone}</p>
+            </Item>
+          ))}
       </List>
 
       <BtnShowMore onClick={loadMore}>Show more</BtnShowMore>

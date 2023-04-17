@@ -1,4 +1,4 @@
-import Button from 'components/Button/Button';
+import CustomBtn from 'components/Button/Button';
 
 import heroMob from '../../images/mob.jpg';
 import heroMob2x from '../../images/mob@2x.jpg';
@@ -40,7 +40,7 @@ export default function Hero() {
       </Description>
 
       <a href="#signUp">
-        <Button>Sign up</Button>
+        <CustomBtn>Sign up</CustomBtn>
       </a>
     </Container>
   );

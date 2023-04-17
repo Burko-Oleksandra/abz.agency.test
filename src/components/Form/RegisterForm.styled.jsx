@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { CustomBtn } from 'components/Button/Button.styled';
 
 export const FormWrap = styled.div`
   display: flex;
@@ -163,4 +164,21 @@ export const Button = styled.button`
   border-radius: 80px;
 
   cursor: no-drop;
+`;
+
+export const SubmitBtn = styled(CustomBtn)`
+  margin: auto auto;
+`;
+
+export const DisabledBtn = styled(CustomBtn)`
+  margin: auto auto;
+  background: #b4b4b4;
+  color: rgba(255, 255, 255, 0.87);
+
+  &:hover,
+  &:focus {
+    cursor: no-drop;
+    background: #b4b4b4;
+    color: rgba(255, 255, 255, 0.87);
+  }
 `;

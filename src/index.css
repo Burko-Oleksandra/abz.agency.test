@@ -108,7 +108,7 @@ input[type='file' i] {
   border: 1px solid #00bdd3;
 }
 
-.disabled-button:disabled {
+.disabled-button {
   background: #b4b4b4;
   color: rgba(255, 255, 255, 0.87);
 }

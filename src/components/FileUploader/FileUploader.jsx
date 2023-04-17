@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 
 import {
   UploadBtn,
+  UploadContainer,
   UploadWrap,
   FakeInput,
   RealInput,
@@ -14,7 +15,7 @@ export const checkUploadFileFormatIsValid = (file, acceptedFileFormats) =>
     fileType => file?.type.includes(fileType) || file?.name.includes(fileType)
   );
 
-const DEFAULT_UPLOAD_MAX_SIZE = 10; // MB
+const DEFAULT_UPLOAD_MAX_SIZE = 5; // MB
 
 const FileUploader = ({ setAvatar }) => {
   const maxFileSizeInBytes = DEFAULT_UPLOAD_MAX_SIZE * 1024 * 1024;
@@ -24,7 +25,7 @@ const FileUploader = ({ setAvatar }) => {
 
   const uploadFileInputLabel = uploadedFile?.name ?? 'Upload your photo';
 
-  const onInputChange = event => {
+  const onInputChange = async event => {
     const target = event.target;
     const file = target.files[0];
 
@@ -35,6 +36,7 @@ const FileUploader = ({ setAvatar }) => {
     }
 
     setUploadedFile(file);
+    setAvatar(file);
   };
 
   const onDrop = event => {
@@ -89,7 +91,7 @@ const FileUploader = ({ setAvatar }) => {
       onDrop={onDrop}
       htmlFor="downloadInput"
     >
-      <div>
+      <UploadContainer>
         <UploadWrap>
           <UploadBtn>Upload</UploadBtn>
           <FakeInput>{uploadFileInputLabel}</FakeInput>
@@ -100,7 +102,7 @@ const FileUploader = ({ setAvatar }) => {
           accept={UPLOADER_FILE_TYPES}
           onChange={onInputChange}
         />
-      </div>
+      </UploadContainer>
     </label>
   );
 };

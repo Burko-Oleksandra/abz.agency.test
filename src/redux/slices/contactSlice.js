@@ -26,6 +26,7 @@ const setContacts = (state, { payload }) => {
 
 const addContact = (state, { payload }) => {
   state.status = 'resolved';
+  state.created = 'true';
   state.contacts.unshift(payload);
 };
 
@@ -34,6 +35,7 @@ const contactsSlice = createSlice({
   initialState: {
     contacts: [],
     status: null,
+    created: false,
     error: null,
   },
   extraReducers: builder => {

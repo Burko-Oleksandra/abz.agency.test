@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Button from 'components/Button/Button';
+import CustomBtn from 'components/Button/Button';
 
 export const UserWrap = styled.div`
   display: flex;
@@ -81,8 +81,9 @@ export const Avatar = styled.img`
 
 export const Description = styled.p`
   margin-bottom: 20px;
+  text-overflow: ellipsis;
 `;
 
-export const BtnShowMore = styled(Button)`
+export const BtnShowMore = styled(CustomBtn)`
   margin: auto auto;
 `;
